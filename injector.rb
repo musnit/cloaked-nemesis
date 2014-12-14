@@ -9,7 +9,10 @@ Object.method_to_intercept = "stuff"
 
 class Object  
   def self.inherited(base)
-    if base==Object.const_get(class_to_intercept)
+    puts Object.method_defined?(:class_to_intercept) 
+    puts Object.const_defined?("Test") 
+    if Object.const_defined?("Test") 
+      if base==Object.const_get(class_to_intercept)
     	def base
     		attr_accessor :method_to_intercept
     	end
@@ -31,9 +34,11 @@ class Object
 			    self.class_eval(a2)
     		end
     	end
+      end  
     end
   end
 end
 puts 23
+binding.pry
 load './test.rb'
 puts 33
